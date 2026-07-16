@@ -1,0 +1,112 @@
+<section class="tasks">
+  <header class="head">
+    <div>
+      <h1>Tasks</h1>
+      <p>
+        @if (isAdmin()) {
+          You can view and reassign every task.
+        } @else {
+          Showing tasks assigned to you.
+        }
+      </p>
+    </div>
+    <button mat-flat-button color="primary" type="button" (click)="openCreate()">
+      <mat-icon>add</mat-icon>
+      New task
+    </button>
+  </header>
+
+  <form class="filters" [formGroup]="filters">
+    <mat-form-field appearance="outline" class="search">
+      <mat-label>Search</mat-label>
+      <input matInput formControlName="search" placeholder="Title or description" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="">All</mat-option>
+        @for (s of statuses; track s) {
+          <mat-option [value]="s">{{ s }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority">
+        <mat-option value="">All</mat-option>
+        @for (p of priorities; track p) {
+          <mat-option [value]="p">{{ p }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Sort</mat-label>
+      <mat-select formControlName="sortBy">
+        @for (opt of sortOptions; track opt.value) {
+          <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="showOverdue" class="overdue-check">Overdue only</mat-checkbox>
+  </form>
+
+  @if (loading()) {
+    <div class="loading">
+      <mat-spinner diameter="36"></mat-spinner>
+    </div>
+  } @else if (tasks().length === 0) {
+    <p class="empty">No tasks match these filters.</p>
+  } @else {
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Due</th>
+            <th>Assignee</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (task of tasks(); track task.id) {
+            <tr [class.overdue]="isOverdue(task)">
+              <td>
+                <p class="title">{{ task.title }}</p>
+                @if (task.description) {
+                  <p class="desc">{{ task.description }}</p>
+                }
+              </td>
+              <td><span class="chip">{{ task.status }}</span></td>
+              <td>
+                <span class="chip" [class]="priorityClass(task.priority)">{{ task.priority }}</span>
+              </td>
+              <td>
+                @if (task.dueDate) {
+                  {{ task.dueDate | date: 'mediumDate' }}
+                } @else {
+                  —
+                }
+              </td>
+              <td>{{ task.assignedUsername || '—' }}</td>
+              <td class="actions">
+                <button mat-icon-button type="button" aria-label="Edit" (click)="openEdit(task)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button type="button" aria-label="Delete" color="warn" (click)="deleteTask(task)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

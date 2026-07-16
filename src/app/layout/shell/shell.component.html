@@ -1,0 +1,51 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav
+    #drawer
+    class="nav"
+    [mode]="mode()"
+    [opened]="drawerOpen()"
+    (openedChange)="onOpenedChange($event)"
+    [fixedInViewport]="mode() === 'over'"
+  >
+    <a class="nav-brand" routerLink="/dashboard" (click)="closeIfMobile()" aria-label="NextTask home">
+      <span class="mark">N</span>
+      <div>
+        <p class="name">NextTask</p>
+        <p class="tag">Work, clearly</p>
+      </div>
+    </a>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="closeIfMobile()">
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>Home</span>
+      </a>
+      <a mat-list-item routerLink="/tasks" routerLinkActive="active" (click)="closeIfMobile()">
+        <mat-icon matListItemIcon>checklist</mat-icon>
+        <span matListItemTitle>Tasks</span>
+      </a>
+    </mat-nav-list>
+
+    <div class="nav-footer">
+      <p class="user-line">{{ user()?.username }}</p>
+      <p class="role-line">{{ user()?.role }}</p>
+      <button mat-stroked-button type="button" (click)="logout()">Sign out</button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    <header class="topbar">
+      <button mat-icon-button type="button" class="menu-btn" (click)="toggleNav()" aria-label="Toggle navigation">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="topbar-copy">
+        <p class="greeting">Hello, {{ user()?.username }}</p>
+        <p class="subtle">Keep priorities moving.</p>
+      </div>
+    </header>
+
+    <main class="page">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

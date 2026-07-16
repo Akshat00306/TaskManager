@@ -1,0 +1,44 @@
+<section class="auth-page">
+  <div class="auth-atmosphere" aria-hidden="true"></div>
+
+  <div class="auth-panel">
+    <p class="brand">NextTask</p>
+    <h1>Welcome back</h1>
+    <p class="lede">Sign in to manage your tasks and keep work moving.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" autocomplete="username" />
+        @if (form.controls.username.touched && form.controls.username.hasError('required')) {
+          <mat-error>Username is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" autocomplete="current-password" />
+        @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        }
+      </mat-form-field>
+
+      @if (error()) {
+        <p class="form-error">{{ error() }}</p>
+      }
+
+      <button mat-flat-button color="primary" type="submit" class="submit" [disabled]="loading()">
+        @if (loading()) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          Sign in
+        }
+      </button>
+    </form>
+
+    <p class="switch">
+      New here?
+      <a routerLink="/register">Create an account</a>
+    </p>
+  </div>
+</section>

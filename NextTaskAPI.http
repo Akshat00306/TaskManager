@@ -1,0 +1,81 @@
+@NextTaskAPI_HostAddress = http://localhost:5292
+@token = 
+
+### Register
+POST {{NextTaskAPI_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "User@123",
+  "role": "User"
+}
+
+### Login (admin)
+POST {{NextTaskAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Admin@123"
+}
+
+### Login (john)
+POST {{NextTaskAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "john",
+  "password": "User@123"
+}
+
+### List users (Admin only)
+GET {{NextTaskAPI_HostAddress}}/api/auth/users
+Authorization: Bearer {{token}}
+
+### Dashboard summary
+GET {{NextTaskAPI_HostAddress}}/api/tasks/dashboard
+Authorization: Bearer {{token}}
+
+### List tasks
+GET {{NextTaskAPI_HostAddress}}/api/tasks
+Authorization: Bearer {{token}}
+
+### List tasks (filtered)
+GET {{NextTaskAPI_HostAddress}}/api/tasks?status=Todo&sortBy=priority&showOverdue=true
+Authorization: Bearer {{token}}
+
+### Get task by id
+GET {{NextTaskAPI_HostAddress}}/api/tasks/1
+Authorization: Bearer {{token}}
+
+### Create task
+POST {{NextTaskAPI_HostAddress}}/api/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Review pull requests",
+  "description": "Go through open PRs and leave feedback",
+  "priority": "High",
+  "status": "Todo",
+  "dueDate": "2026-07-20T00:00:00Z"
+}
+
+### Update task
+PUT {{NextTaskAPI_HostAddress}}/api/tasks/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Review pull requests",
+  "description": "Updated description",
+  "priority": "Medium",
+  "status": "InProgress",
+  "dueDate": "2026-07-22T00:00:00Z",
+  "assignedUserId": 2
+}
+
+### Delete task
+DELETE {{NextTaskAPI_HostAddress}}/api/tasks/1
+Authorization: Bearer {{token}}

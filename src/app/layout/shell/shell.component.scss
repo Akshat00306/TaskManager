@@ -1,0 +1,174 @@
+.shell {
+  min-height: 100vh;
+  background: transparent;
+}
+
+.nav {
+  width: 260px;
+  background: var(--ink);
+  color: #e8f3f1;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-brand {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 1.5rem 1.25rem 1.25rem;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: #06241f;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.tag {
+  margin: 0.1rem 0 0;
+  font-size: 0.75rem;
+  color: rgba(232, 243, 241, 0.65);
+}
+
+mat-nav-list {
+  flex: 1;
+  padding: 0.5rem 0.65rem;
+
+  a {
+    border-radius: 10px;
+    margin-bottom: 0.25rem;
+    color: #e8f3f1 !important;
+
+    // Angular Material (MDC) list item text can override anchor color.
+    // Force readable nav typography for Home / Tasks.
+    .mdc-list-item__primary-text,
+    .mdc-list-item__content {
+      color: #e8f3f1 !important;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    mat-icon {
+      color: rgba(232, 243, 241, 0.75);
+    }
+
+    &:hover {
+      background: rgba(232, 243, 241, 0.08);
+
+      mat-icon {
+        color: rgba(232, 243, 241, 0.92);
+      }
+    }
+
+    &.active {
+      background: rgba(13, 148, 136, 0.22);
+
+      .mdc-list-item__primary-text,
+      .mdc-list-item__content {
+        color: #5eead4 !important;
+      }
+
+      mat-icon {
+        color: #5eead4;
+      }
+    }
+  }
+}
+
+.nav-footer {
+  margin-top: auto;
+  padding: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  button {
+    width: 100%;
+    margin-top: 0.75rem;
+    color: #e8f3f1;
+    border-color: rgba(232, 243, 241, 0.3);
+  }
+}
+
+.user-line {
+  margin: 0;
+  font-weight: 600;
+}
+
+.role-line {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  color: rgba(232, 243, 241, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.content {
+  background:
+    radial-gradient(ellipse 50% 40% at 100% 0%, rgba(13, 148, 136, 0.08), transparent 55%),
+    var(--surface);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(11, 42, 51, 0.08);
+  background: rgba(247, 250, 249, 0.8);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  animation: fade-in 0.4s ease;
+}
+
+.greeting {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.subtle {
+  margin: 0.1rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.page {
+  padding: 1.5rem;
+  animation: fade-in 0.45s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 960px) {
+  .menu-btn {
+    display: none;
+  }
+
+  .page {
+    padding: 2rem 2.25rem;
+  }
+}

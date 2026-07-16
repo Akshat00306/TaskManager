@@ -1,0 +1,146 @@
+.tasks {
+  max-width: 1200px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.35rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.search {
+  grid-column: 1 / -1;
+}
+
+.overdue-check {
+  margin-bottom: 1rem;
+}
+
+.loading,
+.empty {
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+  color: var(--muted);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid rgba(11, 42, 51, 0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(11, 42, 51, 0.06);
+  vertical-align: top;
+}
+
+th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+  background: #f3f7f6;
+}
+
+.title {
+  margin: 0 0 0.2rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.desc {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  max-width: 320px;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: #eef2f1;
+  color: var(--ink);
+}
+
+.prio-high {
+  background: #ffedd5;
+  color: #9a3412;
+}
+
+.prio-medium {
+  background: #ecfdf5;
+  color: #0f766e;
+}
+
+.prio-low {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+tr.overdue td:nth-child(4) {
+  color: #c2410c;
+  font-weight: 600;
+}
+
+.actions {
+  white-space: nowrap;
+  text-align: right;
+}
+
+@media (min-width: 900px) {
+  .filters {
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  }
+
+  .search {
+    grid-column: auto;
+  }
+
+  .overdue-check {
+    margin-bottom: 1.25rem;
+  }
+}
